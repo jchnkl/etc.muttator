@@ -1,8 +1,7 @@
 "0.6 (created: 2010/03/29 00:59:39)
 
 set guioptions=undefined
-set runtimepath=/home/jochen/.muttator
+set runtimepath=${HOME}/.muttator
 set visualbell
-source! /home/jochen/.muttatorrc.local
 
-" vim: set ft=muttator:
+" vim: set ft=muttator:source! ${HOME}.muttatorrc.local
