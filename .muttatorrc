@@ -1,6 +1,5 @@
 "0.6 (created: 2010/03/29 00:59:39)
 
-set guioptions=undefined
 set runtimepath=${HOME}/.muttator
 set visualbell
 
