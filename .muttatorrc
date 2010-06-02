@@ -3,4 +3,6 @@
 set runtimepath=${HOME}/.muttator
 set visualbell
 
-" vim: set ft=muttator:source! ${HOME}.muttatorrc.local
+source! ${HOME}/.muttatorrc.local
+
+" vim: set ft=muttator:
