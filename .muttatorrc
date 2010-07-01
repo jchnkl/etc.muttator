@@ -1,12 +1,12 @@
-"0.6 (created: 2010/03/29 00:59:39)
+"0.6 (created: 2010/06/29 23:32:30)
 
-set runtimepath=${HOME}/.muttator
+map <silent> "\\b" :b#<Return>
+nmap <silent> "\\b" :b#<Return>
+nnoremap <silent> <C-n> gt
+nnoremap <silent> <C-p> gT
+set runtimepath=/home/jochen/.muttator
 set visualbell
-
-map <silent> \\b :b#<CR>
-nmap <silent> \\b :b#<CR>
-vmap <silent> \\b :b#<CR>
-
-source! ${HOME}/.muttatorrc.local
+vmap <silent> "\\b" :b#<Return>
+source! /home/jochen/.muttatorrc.local
 
 " vim: set ft=muttator:
