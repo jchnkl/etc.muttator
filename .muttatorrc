@@ -4,6 +4,8 @@ map <silent> "\\b" :b#<Return>
 nmap <silent> "\\b" :b#<Return>
 nnoremap <silent> <C-n> gt
 nnoremap <silent> <C-p> gT
+noremap <silent> "\\g" :moveto<Space>columbus.lokal.lan:<Space>columbus.lokal.lan/Spam/Train<Space>Good<Return>
+noremap <silent> "\\s" :moveto<Space>columbus.lokal.lan:<Space>columbus.lokal.lan/Spam/Train<Space>Spam<Return>
 set runtimepath=/home/jochen/.muttator
 set visualbell
 vmap <silent> "\\b" :b#<Return>
