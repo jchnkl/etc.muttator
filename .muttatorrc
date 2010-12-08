@@ -11,4 +11,20 @@ set visualbell
 vmap <silent> "\\b" :b#<Return>
 source! /home/jochen/.muttatorrc.local
 
+javascript << EOF
+var currentLayout = -1;
+function changeLayout () {
+  if (document.width < 1920 && currentLayout != kWideMailLayout) {
+    currentLayout = kWideMailLayout;
+    ChangeMailLayout(kWideMailLayout); // kWideMailLayout = 1
+  } else if (document.width >= 1920) {
+    currentLayout = kVerticalMailLayout;
+    ChangeMailLayout(kVerticalMailLayout); // kVerticalMailLayout = 2
+  }
+}
+
+addEventListener("resize", changeLayout, false);
+
+EOF
+
 " vim: set ft=muttator:
