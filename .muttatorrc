@@ -14,10 +14,10 @@ source! /home/jochen/.muttatorrc.local
 javascript << EOF
 var currentLayout = -1;
 function changeLayout () {
-  if (document.width < 1920 && currentLayout != kWideMailLayout) {
+  if (document.width <= 1200 && currentLayout != kWideMailLayout) {
     currentLayout = kWideMailLayout;
     ChangeMailLayout(kWideMailLayout); // kWideMailLayout = 1
-  } else if (document.width >= 1920) {
+  } else if (document.width > 1200 && currentLayout != kVerticalMailLayout) {
     currentLayout = kVerticalMailLayout;
     ChangeMailLayout(kVerticalMailLayout); // kVerticalMailLayout = 2
   }
