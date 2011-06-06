@@ -13,7 +13,7 @@ source! /home/jochen/.muttatorrc.local
 
 javascript << EOF
 var currentLayout = -1;
-function changeLayout () {
+changeLayout = function () {
   if (document.width < window.screen.height && currentLayout != kWideMailLayout) {
     currentLayout = kWideMailLayout;
     ChangeMailLayout(kWideMailLayout); // kWideMailLayout = 1
@@ -28,5 +28,7 @@ function changeLayout () {
 addEventListener("resize", changeLayout, false);
 
 EOF
+
+autocmd MuttatorEnter .* -javascript changeLayout
 
 " vim: set ft=muttator:
