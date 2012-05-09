@@ -44,6 +44,18 @@ changeLayout = function () {
     }
 
 }
+
+function printAspect() {
+    alert ( "currentLayout:           " + currentLayout()        + "\n"
+          + "document.width:          " + document.width         + "\n"
+          + "document.height:         " + document.height        + "\n"
+          + "window.screen.width:     " + window.screen.width    + "\n"
+          + "window.screen.height:    " + window.screen.height   + "\n"
+          +      document.width + " / " + document.height        + " = "
+          +        document.width / document.height              + "\n"
+          + window.screen.width + " / " + window.screen.height   + " = "
+          +     window.screen.width / window.screen.height       + "\n"
+          );
 }
 
 addEventListener("resize", changeLayout, false);
