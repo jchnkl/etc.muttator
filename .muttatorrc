@@ -1,5 +1,8 @@
 "0.6 (created: 2010/06/29 23:32:30)
 
+cmap        <silent> <C-n> <Down>
+cmap        <silent> <C-p> <Up>
+
 map <silent> "\\b" :b#<Return>
 nmap <silent> "\\b" :b#<Return>
 nnoremap <silent> <C-n> gt
