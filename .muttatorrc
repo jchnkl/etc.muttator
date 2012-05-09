@@ -25,13 +25,25 @@ function currentLayout() {
 }
 
 changeLayout = function () {
-  if (document.width < window.screen.height && currentLayout() != kWideMailLayout) {
-    ChangeMailLayout(kWideMailLayout); // kWideMailLayout = 1
-  } else if (document.width >= window.screen.height && currentLayout() != kVerticalMailLayout) {
-    ChangeMailLayout(kVerticalMailLayout); // kVerticalMailLayout = 2
-  } else {
-    return
-  }
+
+    var aspectRatio = 4/3;
+
+    if (    document.width / document.height <= aspectRatio
+         &&                  currentLayout() != kWideMailLayout )
+    {
+        ChangeMailLayout ( kWideMailLayout );
+
+    } else if (    document.width / document.height >  aspectRatio
+                &&                  currentLayout() != kVerticalMailLayout )
+    {
+
+        ChangeMailLayout ( kVerticalMailLayout );
+
+    } else {
+        return;
+    }
+
+}
 }
 
 addEventListener("resize", changeLayout, false);
