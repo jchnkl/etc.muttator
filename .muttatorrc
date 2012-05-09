@@ -18,13 +18,16 @@ vmap <silent> "\\b" :b#<Return>
 source! /home/jochen/.muttatorrc.local
 
 javascript << EOF
-var currentLayout = -1;
+
+function currentLayout() {
+    // mozilla/comm-central/mail/base/content/mailWindowOverlay.js
+    return gPrefBranch.getIntPref ( "mail.pane_config.dynamic" );
+}
+
 changeLayout = function () {
-  if (document.width < window.screen.height && currentLayout != kWideMailLayout) {
-    currentLayout = kWideMailLayout;
+  if (document.width < window.screen.height && currentLayout() != kWideMailLayout) {
     ChangeMailLayout(kWideMailLayout); // kWideMailLayout = 1
-  } else if (document.width >= window.screen.height && currentLayout != kVerticalMailLayout) {
-    currentLayout = kVerticalMailLayout;
+  } else if (document.width >= window.screen.height && currentLayout() != kVerticalMailLayout) {
     ChangeMailLayout(kVerticalMailLayout); // kVerticalMailLayout = 2
   } else {
     return
