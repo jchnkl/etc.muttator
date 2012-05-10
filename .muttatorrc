@@ -19,15 +19,15 @@ source! /home/jochen/.muttatorrc.local
 
 javascript << EOF
 
+var aspectRatioClassic  = 9/10;
+var aspectRatioVertical = 4/3;
+
 function currentLayout() {
     // mozilla/comm-central/mail/base/content/mailWindowOverlay.js
     return gPrefBranch.getIntPref ( "mail.pane_config.dynamic" );
 }
 
 changeLayout = function () {
-
-    var aspectRatioClassic  = 1;
-    var aspectRatioVertical = 16/10;
 
     if (    document.width / document.height >= aspectRatioVertical
          &&                  currentLayout() != kVerticalMailLayout )
