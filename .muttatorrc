@@ -27,20 +27,28 @@ function currentLayout() {
 changeLayout = function () {
 
     var aspectRatioClassic  = 4/3;
+    var aspectRatioVertical = 16/9;
 
-    if (    document.width / document.height <= aspectRatioClassic
-         &&                  currentLayout() != kWideMailLayout )
+    if (    document.width / document.height >= aspectRatioClassic
+         &&                  currentLayout() != kClassicMailLayout )
     {
         // browser.dom.window.dump.enabled -> true
-        dump ( "kWideMailLayout" + "\n" );
-        ChangeMailLayout ( kWideMailLayout );
+        dump ( "kClassicMailLayout" + "\n" );
+        ChangeMailLayout ( kClassicMailLayout );
 
-    } else if (    document.width / document.height >  aspectRatioClassic
+    } else if (    document.width / document.height >= aspectRatioVertical
                 &&                  currentLayout() != kVerticalMailLayout )
     {
         // browser.dom.window.dump.enabled -> true
         dump ( "kVerticalMailLayout" + "\n" );
         ChangeMailLayout ( kVerticalMailLayout );
+
+    } else if (    document.width / document.height <= aspectRatioClassic
+                &&                  currentLayout() != kWideMailLayout )
+    {
+        // browser.dom.window.dump.enabled -> true
+        dump ( "kWideMailLayout" + "\n" );
+        ChangeMailLayout ( kWideMailLayout );
 
     } else {
         return;
