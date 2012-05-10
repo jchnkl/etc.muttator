@@ -31,12 +31,15 @@ changeLayout = function () {
     if (    document.width / document.height <= aspectRatio
          &&                  currentLayout() != kWideMailLayout )
     {
+        // browser.dom.window.dump.enabled -> true
+        dump ( "kWideMailLayout" + "\n" );
         ChangeMailLayout ( kWideMailLayout );
 
     } else if (    document.width / document.height >  aspectRatio
                 &&                  currentLayout() != kVerticalMailLayout )
     {
-
+        // browser.dom.window.dump.enabled -> true
+        dump ( "kVerticalMailLayout" + "\n" );
         ChangeMailLayout ( kVerticalMailLayout );
 
     } else {
