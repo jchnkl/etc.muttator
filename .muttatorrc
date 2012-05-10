@@ -56,8 +56,8 @@ changeLayout = function () {
 
 }
 
-function printAspect() {
-    alert ( "currentLayout:           " + currentLayout()        + "\n"
+function aspectStringInfo() {
+    return  "currentLayout:           " + currentLayout()        + "\n"
           + "document.width:          " + document.width         + "\n"
           + "document.height:         " + document.height        + "\n"
           + "window.screen.width:     " + window.screen.width    + "\n"
@@ -65,8 +65,7 @@ function printAspect() {
           +      document.width + " / " + document.height        + " = "
           +        document.width / document.height              + "\n"
           + window.screen.width + " / " + window.screen.height   + " = "
-          +     window.screen.width / window.screen.height       + "\n"
-          );
+          +     window.screen.width / window.screen.height       + "\n";
 }
 
 removeEventListener ( "resize", changeLayout, false );
