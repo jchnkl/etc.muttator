@@ -27,7 +27,7 @@ function currentLayout() {
 changeLayout = function () {
 
     var aspectRatioClassic  = 4/3;
-    var aspectRatioVertical = 16/9;
+    var aspectRatioVertical = 16/10;
 
     if (    document.width / document.height >= aspectRatioClassic
          &&                  currentLayout() != kClassicMailLayout )
