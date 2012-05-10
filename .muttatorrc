@@ -26,7 +26,7 @@ function currentLayout() {
 
 changeLayout = function () {
 
-    var aspectRatioClassic  = 4/3;
+    var aspectRatioClassic  = 1;
     var aspectRatioVertical = 16/10;
 
     if (    document.width / document.height >= aspectRatioVertical
