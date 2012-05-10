@@ -69,6 +69,7 @@ function printAspect() {
           );
 }
 
+removeEventListener("resize", changeLayout, false);
 addEventListener("resize", changeLayout, false);
 
 EOF
