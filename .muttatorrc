@@ -14,12 +14,25 @@ nnoremap    <silent> <C-p> gT
 noremap     <silent> "\\g" :copyto<Space>columbus.lokal.lan:<Space>columbus.lokal.lan/Spam/Train<Space>Good<Return>
 noremap     <silent> "\\s" :moveto<Space>columbus.lokal.lan:<Space>columbus.lokal.lan/Spam/Train<Space>Spam<Return>
 
+map <silent> R :javascript smartReply();<CR>
+
 set runtimepath=/home/jochen/.muttator
 set visualbell
 vmap <silent> "\\b" :b#<Return>
 source! /home/jochen/.muttatorrc.local
 
 javascript << EOF
+
+function smartReply()
+{
+  if (IsReplyListEnabled()) {
+    MsgReplyToListMessage();
+  } else if (IsReplyAllEnabled()) {
+    MsgReplyToAllMessage();
+  } else {
+    MsgReplyMessage();
+  }
+}
 
 var aspectRatioClassic  = 9/10;
 var aspectRatioVertical = 4/3;
