@@ -9,10 +9,7 @@ nmap        <silent> "\\b" :b#<Return>
 nnoremap    <silent> <C-n> gt
 nnoremap    <silent> <C-p> gT
 
-set runtimepath=/home/jochen/.muttator
-set visualbell
 vmap <silent> "\\b" :b#<Return>
-source! /home/jochen/.muttatorrc.local
 
 javascript << EOF
 
