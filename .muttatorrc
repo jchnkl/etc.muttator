@@ -19,44 +19,167 @@ javascript << EOF
 var aspectRatioClassic  = 9/10;
 var aspectRatioVertical = 4/3;
 
-function currentLayout() {
-    // mozilla/comm-central/mail/base/content/mailWindowOverlay.js
-    return gPrefBranch.getIntPref ( "mail.pane_config.dynamic" );
-}
-
-changeLayout = function () {
-
-    if (    document.width / document.height >= aspectRatioVertical
-         &&                  currentLayout() != kVerticalMailLayout )
-    {
-        // browser.dom.window.dump.enabled -> true
-        dump ( "kVerticalMailLayout" + "\n" );
-        dump ( aspectStringInfo() );
-        ChangeMailLayout ( kVerticalMailLayout );
-
-    } else if (    document.width / document.height >  aspectRatioClassic
-         &&        document.width / document.height <  aspectRatioVertical
-         &&                         currentLayout() != kClassicMailLayout )
-    {
-        // browser.dom.window.dump.enabled -> true
-        dump ( "kClassicMailLayout" + "\n" );
-        dump ( aspectStringInfo() );
-        ChangeMailLayout ( kClassicMailLayout );
-
-
-    } else if (    document.width / document.height <= aspectRatioClassic
-                &&                  currentLayout() != kWideMailLayout )
-    {
-        // browser.dom.window.dump.enabled -> true
-        dump ( "kWideMailLayout" + "\n" );
-        dump ( aspectStringInfo() );
-        ChangeMailLayout ( kWideMailLayout );
-
-    } else {
-        return;
+function showIds(children) {
+    var names = "";
+    for (var i = 0; i < children.length; ++i) {
+        names += " [ " + children[i].id;
+        names += " { ";
+        names += showIds(children[i].children);
+        names += " } ";
+        names += " ] ";
     }
-
+    return names;
 }
+
+function showElementIdsById(id) {
+    return showIds(document.getElementById(id));
+}
+
+function alertDocumentNodeIds() {
+    alert(showIds(document.children));
+}
+
+function getCurrentLayout() {
+    return getPrefSafe("mail.pane_config.dynamic", null);
+}
+
+// MoreLayouts.gCurrentPaneConfig
+// MoreLayouts.kStackedPaneConfig
+
+function getMessengerBox() {
+    return document.getElementById("messengerBox");
+}
+
+function getThreadPaneBox() {
+    return document.getElementById("threadPaneBox");
+}
+
+function getThreadContentArea() {
+    return document.getElementById("threadContentArea");
+}
+
+function getFolderPaneBox() {
+    return document.getElementById("folderPaneBox");
+}
+
+function getMessagePaneBoxWrapper() {
+    return document.getElementById("messagepaneboxwrapper");
+}
+
+function getDisplayDeck() {
+    return document.getElementById("displayDeck");
+}
+
+// function getFolderPaneBoxWidth() {
+//     return document.getElementById("folderPaneBox").clientWidth;
+// }
+
+// function setFolderPaneBoxWidth(width) {
+//     document.getElementById("folderPaneBox").width = width;
+// }
+
+function toggleTodayPane() {
+    document.getElementById('calendar_toggle_todaypane_command').doCommand();
+}
+
+function todayPaneIsCollapsed() {
+    return document.getElementById("today-pane-panel").collapsed;
+}
+
+function collapseTodayPane(collapse) {
+    document.getElementById("today-pane-panel").collapsed = collapse;
+}
+
+// function getTodayPaneWidth() {
+//     return document.getElementById("today-pane-panel").clientWidth;
+// }
+
+// function setTodayPaneWidth(width) {
+//     document.getElementById("today-pane-panel").width = width;
+// }
+
+// function getMessengerBoxWidth() {
+//     return document.width - getFolderPaneBoxWidth() - getTodayPaneWidth();
+// }
+
+// function setMessengerBoxWidth(msgBoxWidth) {
+//     setTodayPaneWidth(0);
+//     setFolderPaneBoxWidth(document.width - msgBoxWidth - getTodayPaneWidth());
+// }
+
+// function setFolderPaneBoxHeight(height) {
+//     getFolderPaneBox().height = height;
+// }
+
+function setClassicMailLayout() {
+    if (getCurrentLayout() != kClassicMailLayout) {
+        ChangeMailLayout(kClassicMailLayout);
+    }
+}
+
+function setStackedPaneLayout() {
+    if (getCurrentLayout() != MoreLayouts.kStackedPaneConfig) {
+        ChangeMailLayout(MoreLayouts.kStackedPaneConfig);
+    }
+}
+
+function setVerticalMailLayout() {
+    if (getCurrentLayout() != kVerticalMailLayout) {
+        ChangeMailLayout(kVerticalMailLayout);
+    }
+}
+
+function setWideMailLayout() {
+    if (getCurrentLayout() != kWideMailLayout) {
+        ChangeMailLayout(kWideMailLayout);
+    }
+}
+
+function setWideThreadMailLayout() {
+    if (getCurrentLayout() != MoreLayouts.kWideThreadMailLayout) {
+        ChangeMailLayout(MoreLayouts.kWideThreadMailLayout);
+    }
+}
+
+
+function hideColumn(col) {
+    // alert(showIds(getThreadPaneBox().children));
+    document.getElementById(col).hidden = true;
+}
+
+// function changeLayout() {
+//
+//     if (    document.width / document.height >= aspectRatioVertical
+//          &&                  currentLayout() != kVerticalMailLayout )
+//     {
+//         // browser.dom.window.dump.enabled -> true
+//         dump ( "kVerticalMailLayout" + "\n" );
+//         dump ( aspectStringInfo() );
+//         ChangeMailLayout ( kVerticalMailLayout );
+//
+//     } else if (    document.width / document.height >  aspectRatioClassic
+//          &&        document.width / document.height <  aspectRatioVertical
+//          &&                         currentLayout() != kClassicMailLayout )
+//     {
+//         // browser.dom.window.dump.enabled -> true
+//         dump ( "kClassicMailLayout" + "\n" );
+//         dump ( aspectStringInfo() );
+//         ChangeMailLayout ( kClassicMailLayout );
+//
+//
+//     } else if (    document.width / document.height <= aspectRatioClassic
+//                 &&                  currentLayout() != kWideMailLayout )
+//     {
+//         // browser.dom.window.dump.enabled -> true
+//         dump ( "kWideMailLayout" + "\n" );
+//         dump ( aspectStringInfo() );
+//         ChangeMailLayout ( kWideMailLayout );
+//
+//     } else {
+//         return;
+//     }
+//
+// }
 
 function aspectStringInfo() {
     return  "currentLayout:           " + currentLayout()        + "\n"
@@ -70,8 +193,84 @@ function aspectStringInfo() {
           +     window.screen.width / window.screen.height       + "\n";
 }
 
-removeEventListener ( "resize", changeLayout, false );
-addEventListener    ( "resize", changeLayout, false );
+// threadCol
+// flaggedCol
+// attachmentCol
+// subjectCol
+// unreadButtonColHeader
+// senderCol
+// recipientCol
+// junkStatusCol
+// receivedCol
+// dateCol
+// statusCol
+// sizeCol
+// tagsCol
+// accountCol
+// priorityCol
+// unreadCol
+// totalCol
+// locationCol
+// idCol
+// enigmailStatusCol
+
+function isSmallScreen()
+{
+    return window.screen.width == 1366
+        && window.screen.height == 768;
+}
+
+function isLargeScreen()
+{
+    return window.screen.width == 2560
+        && window.screen.height == 1600;
+}
+
+function isSmallArea()
+{
+    return document.width <= 954;
+}
+
+function isPivotScreen()
+{
+    return window.screen.width == 1200
+        && window.screen.height == 1920;
+}
+
+function onResize()
+{
+    // most values are hand-tuned, sorry
+
+    if (isSmallScreen()) {
+        setVerticalMailLayout();
+        getFolderPaneBox().width = 160;
+        getMessagePaneBoxWrapper().width = 660;
+        return;
+
+    } else if (isLargeScreen()) {
+        if (isSmallArea()) {
+            setWideMailLayout();
+            getFolderPaneBox().width = 160;
+            getMessengerBox().height = 615;
+            return;
+
+        } else {
+            setVerticalMailLayout();
+            getFolderPaneBox().width = 160;
+            getMessagePaneBoxWrapper().width = 300;
+            return;
+        }
+
+    } else if (isPivotScreen()) {
+        setStackedPaneLayout();
+        getDisplayDeck().height = 1210;
+        getFolderPaneBox().width = 320;
+        getMessagePaneBoxWrapper().width = 660;
+        return;
+    }
+}
+
+window.onresize = onResize;
 
 EOF
 
