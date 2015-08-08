@@ -9,6 +9,9 @@ nmap        <silent> "\\b" :b#<Return>
 nnoremap    <silent> <C-n> gt
 nnoremap    <silent> <C-p> gT
 
+command! -description 'View message body as simple HTML' html emenu View.Message Body As.Simple HTML
+command! -description 'View message body as plain text' text emenu View.Message Body As.Plain Text
+
 vmap <silent> "\\b" :b#<Return>
 
 javascript << EOF
