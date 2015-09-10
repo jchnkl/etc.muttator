@@ -17,9 +17,6 @@ command! -description 'View message body as plain text' text emenu View.Message 
 
 map <silent> R :javascript smartReply();<CR>
 
-command! -description 'View Body as simple HTML' html emenu View.Message Body As.Simple HTML
-command! -description 'View Body as plain text' text emenu View.Message Body As.Plain Text
-
 javascript << EOF
 
 function smartReply()
