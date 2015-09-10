@@ -1,6 +1,7 @@
 "0.6 (created: 2010/06/29 23:32:30)
 
 set editor='urxvt -e vim'
+set visualbell
 
 cmap        <silent> <C-n> <Down>
 cmap        <silent> <C-p> <Up>
