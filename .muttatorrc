@@ -3,6 +3,11 @@
 set editor='urxvt -e vim'
 set visualbell
 
+" new font rendering engine does not support bitmap fonts anymore
+" dirty workaround, as of FF 44
+" https://bug635044.bugzilla.mozilla.org/show_bug.cgi?id=1243194
+set! gfx.font_rendering.fontconfig.fontlist.enabled=false
+
 cmap        <silent> <C-n> <Down>
 cmap        <silent> <C-p> <Up>
 
